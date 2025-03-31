@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Diện Tích</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            color: red;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .link {
+            display: block;
+            margin-top: 15px;
+            color: blue;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TÍNH DIỆN TÍCH</h1>
+        <select id="shape" onchange="showInputs()">
+            <option value="circle">Hình tròn</option>
+            <option value="square">Hình vuông</option>
+            <option value="triangle">Hình tam giác</option>
+            <option value="rectangle">Hình chữ nhật</option>
+        </select>
+        <div id="inputs"></div>
+        <button onclick="calculateArea()">Tính diện tích</button>
+        <p id="result"></p>
+        <a href="https://www.youtube.com/" class="link" target="_blank">Truy cập trang khác</a>
+        <a href="download/tinhdientich-software.zip" class="link" download>Tải phần mềm</a>
+    </div>
+
+    <script>
+        function showInputs() {
+            const shape = document.getElementById("shape").value;
+            const inputsDiv = document.getElementById("inputs");
+            inputsDiv.innerHTML = "";
+
+            if (shape === "circle") {
+                inputsDiv.innerHTML = '<input type="number" id="radius" placeholder="Bán kính">';
+            } else if (shape === "square") {
+                inputsDiv.innerHTML = '<input type="number" id="side" placeholder="Cạnh">';
+            } else if (shape === "triangle") {
+                inputsDiv.innerHTML = '<input type="number" id="base" placeholder="Cạnh đáy">' +
+                                      '<input type="number" id="height" placeholder="Chiều cao">';
+            } else if (shape === "rectangle") {
+                inputsDiv.innerHTML = '<input type="number" id="length" placeholder="Chiều dài">' +
+                                      '<input type="number" id="width" placeholder="Chiều rộng">';
+            }
+        }
+
+        function calculateArea() {
+            const shape = document.getElementById("shape").value;
+            let area = 0;
+            
+            if (shape === "circle") {
+                const radius = document.getElementById("radius").value;
+                area = Math.PI * Math.pow(Number(radius), 2);
+            } else if (shape === "square") {
+                const side = document.getElementById("side").value;
+                area = Math.pow(Number(side), 2);
+            } else if (shape === "triangle") {
+                const base = document.getElementById("base").value;
+                const height = document.getElementById("height").value;
+                area = (Number(base) * Number(height)) / 2;
+            } else if (shape === "rectangle") {
+                const length = document.getElementById("length").value;
+                const width = document.getElementById("width").value;
+                area = Number(length) * Number(width);
+            }
+            
+            document.getElementById("result").innerText = "Diện tích: " + area.toFixed(2);
+        }
+    </script>
+</body>
+</html>
